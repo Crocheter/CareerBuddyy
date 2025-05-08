@@ -46,17 +46,19 @@ if "vectors" not in st.session_state:
 
 prompt1=st.text_input("Message Kairos")
 
-
-if st.button("Submit"):
-    vector_embedding()
-    st.write("Here's your answer")
-
 def vector_embedding():
     # Example function that takes the user input and processes it
     user_query = st.session_state.prompt1  # Get input from the text field
     # Use the FAISS vectors to search the documents or generate a response
     response = st.session_state.vectors.similarity_search(user_query, k=1)  # Example search query
     st.write(response)  # Display the response (or process it as needed)
+
+
+
+if st.button("Submit"):
+    vector_embedding()
+    st.write("Here's your answer")
+
 
 
 import time
