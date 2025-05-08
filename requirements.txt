@@ -1,0 +1,13 @@
+openai
+lamini
+streamlit
+langchain
+langchain-community
+langchain-groq
+langchain-openai
+groq
+dotenv
+pypdf
+faiss-cpu
+langchain_google_genai
+PyPDF2
