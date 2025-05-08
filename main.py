@@ -12,9 +12,9 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-## load the GROQ And OpenAI API KEY 
-groq_api_key=os.getenv('GROQ_API_KEY')
-os.environ["GOOGLE_API_KEY"]=os.getenv("GOOGLE_API_KEY")
+## load the GROQ And Google API KEY 
+google_api_key = st.secrets["google_api_key"]["GOOGLE_API_KEY"]
+groq_api_key = st.secrets["groq_api_key"]["GROQ_API_KEY"]
 
 st.title("Career Buddy")
 st.write("Hi, I am Kairos, your Career Buddy! Ask me anything Career Related.")
