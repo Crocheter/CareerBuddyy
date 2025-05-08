@@ -35,20 +35,15 @@ Questions:{input}
 """
 )
 
-def vector_embedding():
+if "vectors" not in st.session_state:
 
-    if "vectors" not in st.session_state:
-
-        st.session_state.embeddings=GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
-        st.session_state.loader=PyPDFDirectoryLoader("./rag_data") ## Data Ingestion
-        st.session_state.docs=st.session_state.loader.load() ## Document Loading
-        st.session_state.text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200) ## Chunk Creation
-        st.session_state.final_documents=st.session_state.text_splitter.split_documents(st.session_state.docs[:20]) #splitting
-        st.session_state.vectors=FAISS.from_documents(st.session_state.final_documents,st.session_state.embeddings) #vector OpenAI embeddings
-
-
-
-
+  st.session_state.embeddings=GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
+  st.session_state.loader=PyPDFDirectoryLoader("./rag_data") ## Data Ingestion
+  st.session_state.docs=st.session_state.loader.load() ## Document Loading
+  st.session_state.text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200) ## Chunk Creation
+  st.session_state.final_documents=st.session_state.text_splitter.split_documents(st.session_state.docs[:20]) #splitting
+  st.session_state.vectors=FAISS.from_documents(st.session_state.final_documents,st.session_state.embeddings) #vector OpenAI embeddings
+  
 
 prompt1=st.text_input("Message Kairos")
 
@@ -56,6 +51,14 @@ prompt1=st.text_input("Message Kairos")
 if st.button("Submit"):
     vector_embedding()
     st.write("Here's your answer")
+
+def vector_embedding():
+    # Example function that takes the user input and processes it
+    user_query = st.session_state.prompt1  # Get input from the text field
+    # Use the FAISS vectors to search the documents or generate a response
+    response = st.session_state.vectors.similarity_search(user_query, k=1)  # Example search query
+    st.write(response)  # Display the response (or process it as needed)
+
 
 import time
 
